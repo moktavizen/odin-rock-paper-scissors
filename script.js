@@ -50,25 +50,30 @@ COM\t: ${computerScore}`;
   // if lose, increment computer score, set message
   // show message
   function playRound(humanChoice, computerChoice) {
-    const playerChoice = humanChoice.toLowerCase();
+    function capitalize(str) {
+      return `${str.at(0).toUpperCase()}${str.slice(1).toLowerCase()}`;
+    }
+
+    const stdHumanChoice = capitalize(humanChoice);
+    const stdComputerChoice = capitalize(computerChoice);
     let roundMsg;
 
-    if (playerChoice === computerChoice) {
-      roundMsg = `Draw! Both chose ${playerChoice}`;
+    if (stdHumanChoice === stdComputerChoice) {
+      roundMsg = `Draw! Both chose ${stdHumanChoice}`;
     } else if (
-      (playerChoice === "rock" && computerChoice === "scissors") ||
-      (playerChoice === "paper" && computerChoice === "rock") ||
-      (playerChoice === "scissors" && computerChoice === "paper")
+      (stdHumanChoice === "Rock" && stdComputerChoice === "Scissors") ||
+      (stdHumanChoice === "Paper" && stdComputerChoice === "Rock") ||
+      (stdHumanChoice === "Scissors" && stdComputerChoice === "Paper")
     ) {
       humanScore++;
-      roundMsg = `You win! ${playerChoice} beats ${computerChoice}`;
+      roundMsg = `You win! ${stdHumanChoice} beats ${stdComputerChoice}`;
     } else if (
-      (computerChoice === "rock" && playerChoice === "scissors") ||
-      (computerChoice === "paper" && playerChoice === "rock") ||
-      (computerChoice === "scissors" && playerChoice === "paper")
+      (stdComputerChoice === "Rock" && stdHumanChoice === "Scissors") ||
+      (stdComputerChoice === "Paper" && stdHumanChoice === "Rock") ||
+      (stdComputerChoice === "Scissors" && stdHumanChoice === "Paper")
     ) {
       computerScore++;
-      roundMsg = `You Lose! ${computerChoice} beats ${playerChoice}`;
+      roundMsg = `You Lose! ${stdComputerChoice} beats ${stdHumanChoice}`;
     } else {
       roundMsg = "Error! Invalid match";
     }
