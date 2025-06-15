@@ -102,7 +102,7 @@ COM\t: ${computerScore}`;
     winnerMsg = "Draw! No winner!";
   }
 
-  showScore(winnerMsg, playerScore, computerScore);
+  showScore(winnerMsg, humanScore, computerScore);
 }
 
 playGame();
