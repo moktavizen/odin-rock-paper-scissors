@@ -63,7 +63,6 @@ COM: ${computerScore}`,
 Player 1: ${humanScore}
 COM: ${computerScore}`,
       );
-      console.log(`${humanScore} : ${computerScore}`);
     } else if (playerChoice === "rock" && computerChoice === "scissors") {
       humanScore++;
       console.log(
