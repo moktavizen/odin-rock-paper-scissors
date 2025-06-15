@@ -33,6 +33,14 @@ function playGame() {
   let humanScore = 0;
   let computerScore = 0;
 
+  function showScore(message, playerScore, computerScore) {
+    const text = `${message}
+Player\t: ${playerScore}
+COM\t: ${computerScore}`;
+
+    console.log(text);
+  }
+
   // Input  : human and computer choice
   // Output : logs a winner announcement
   //
@@ -46,76 +54,35 @@ function playGame() {
   // If human scissors and computer rock, computer wins, increment computer
   // If human scissors and computer paper, human wins, increment human
   // If human scissors and computer scissors, draw, no increment
-
   function playRound(humanChoice, computerChoice) {
     const playerChoice = humanChoice.toLowerCase();
 
     if (playerChoice === "rock" && computerChoice === "rock") {
-      console.log(
-        `Draw! Both chose Rock
-Player 1: ${humanScore}
-COM: ${computerScore}`,
-      );
+      showScore("Draw! Both chose Rock", playerScore, computerScore);
     } else if (playerChoice === "rock" && computerChoice === "paper") {
       computerScore++;
-      console.log(
-        `You lose! Paper beats Rock
-Player 1: ${humanScore}
-COM: ${computerScore}`,
-      );
+      showScore("You lose! Paper beats Rock", playerScore, computerScore);
     } else if (playerChoice === "rock" && computerChoice === "scissors") {
       humanScore++;
-      console.log(
-        `You win! Rock beats Scissors
-Player 1: ${humanScore}
-COM: ${computerScore}`,
-      );
+      showScore("You win! Rock beats Scissors", playerScore, computerScore);
     } else if (playerChoice === "paper" && computerChoice === "rock") {
       humanScore++;
-      console.log(
-        `You win! Paper beats Scissors
-Player 1: ${humanScore}
-COM: ${computerScore}`,
-      );
+      showScore("You win! Paper beats Scissors", playerScore, computerScore);
     } else if (playerChoice === "paper" && computerChoice === "paper") {
-      console.log(
-        `Draw! Both chose Paper
-Player 1: ${humanScore}
-COM: ${computerScore}`,
-      );
+      showScore("Draw! Both chose Paper ", playerScore, computerScore);
     } else if (playerChoice === "paper" && computerChoice === "scissors") {
       computerScore++;
-      console.log(
-        `You lose! Scissors beats Paper
-Player 1: ${humanScore}
-COM: ${computerScore}`,
-      );
+      showScore("You lose! Scissors beats Paper ", playerScore, computerScore);
     } else if (playerChoice === "scissors" && computerChoice === "rock") {
       computerScore++;
-      console.log(
-        `You lose! Rock beats Scissors
-Player 1: ${humanScore}
-COM: ${computerScore}`,
-      );
+      showScore("You lose! Rock beats Scissors ", playerScore, computerScore);
     } else if (playerChoice === "scissors" && computerChoice === "paper") {
       humanScore++;
-      console.log(
-        `You win! Scissors beats Paper
-Player 1: ${humanScore}
-COM: ${computerScore}`,
-      );
+      showScore("You win! Scissors beats Paper ", playerScore, computerScore);
     } else if (playerChoice === "scissors" && computerChoice === "scissors") {
-      console.log(
-        `Draw! Both chose Scissors
-Player 1: ${humanScore}
-COM: ${computerScore}`,
-      );
+      showScore("Draw! Both chose Scissors ", playerScore, computerScore);
     } else {
-      console.log(
-        `Error! Invalid match
-Player 1: ${humanScore}
-COM: ${computerScore}`,
-      );
+      showScore("Error! Invalid match ", playerScore, computerScore);
     }
   }
 
@@ -125,21 +92,17 @@ COM: ${computerScore}`,
   playRound(getHumanChoice(), getComputerChoice());
   playRound(getHumanChoice(), getComputerChoice());
 
-  let winner;
+  let winnerMsg;
 
   if (humanScore > computerScore) {
-    winner = "Human";
+    winnerMsg = "The winner is Human!";
   } else if (humanScore < computerScore) {
-    winner = "Computer";
+    winnerMsg = "The winner is Computer";
   } else {
-    winner = "Draw! No winner!";
+    winnerMsg = "Draw! No winner!";
   }
 
-  console.log(
-    `The winner is ${winner}!
-Player 1: ${humanScore}
-COM: ${computerScore}`,
-  );
+  showScore(winnerMsg, playerScore, computerScore);
 }
 
 playGame();
