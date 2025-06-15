@@ -42,48 +42,38 @@ COM\t: ${computerScore}`;
   }
 
   // Input  : human and computer choice
-  // Output : logs a winner announcement
+  // Output : show round winner
   //
   // Normalize the inputs
-  // If human rock and computer rock, draw, no increment
-  // If human rock and computer paper, computer wins, increment computer
-  // If human rock and computer scissors, human wins, increment human
-  // If human paper and computer rock, human wins, increment human
-  // If human paper and computer paper, draw, no increment
-  // If human paper and computer scissors, computer wins, increment computer
-  // If human scissors and computer rock, computer wins, increment computer
-  // If human scissors and computer paper, human wins, increment human
-  // If human scissors and computer scissors, draw, no increment
+  // If draw, don't increment, set message
+  // if win, increment human score, set message
+  // if lose, increment computer score, set message
+  // show message
   function playRound(humanChoice, computerChoice) {
     const playerChoice = humanChoice.toLowerCase();
+    let roundMsg;
 
-    if (playerChoice === "rock" && computerChoice === "rock") {
-      showScore("Draw! Both chose Rock", playerScore, computerScore);
-    } else if (playerChoice === "rock" && computerChoice === "paper") {
-      computerScore++;
-      showScore("You lose! Paper beats Rock", playerScore, computerScore);
-    } else if (playerChoice === "rock" && computerChoice === "scissors") {
+    if (playerChoice === computerChoice) {
+      roundMsg = `Draw! Both chose ${playerChoice}`;
+    } else if (
+      (playerChoice === "rock" && computerChoice === "scissors") ||
+      (playerChoice === "paper" && computerChoice === "rock") ||
+      (playerChoice === "scissors" && computerChoice === "paper")
+    ) {
       humanScore++;
-      showScore("You win! Rock beats Scissors", playerScore, computerScore);
-    } else if (playerChoice === "paper" && computerChoice === "rock") {
-      humanScore++;
-      showScore("You win! Paper beats Scissors", playerScore, computerScore);
-    } else if (playerChoice === "paper" && computerChoice === "paper") {
-      showScore("Draw! Both chose Paper ", playerScore, computerScore);
-    } else if (playerChoice === "paper" && computerChoice === "scissors") {
+      roundMsg = `You win! ${playerChoice} beats ${computerChoice}`;
+    } else if (
+      (computerChoice === "rock" && playerChoice === "scissors") ||
+      (computerChoice === "paper" && playerChoice === "rock") ||
+      (computerChoice === "scissors" && playerChoice === "paper")
+    ) {
       computerScore++;
-      showScore("You lose! Scissors beats Paper ", playerScore, computerScore);
-    } else if (playerChoice === "scissors" && computerChoice === "rock") {
-      computerScore++;
-      showScore("You lose! Rock beats Scissors ", playerScore, computerScore);
-    } else if (playerChoice === "scissors" && computerChoice === "paper") {
-      humanScore++;
-      showScore("You win! Scissors beats Paper ", playerScore, computerScore);
-    } else if (playerChoice === "scissors" && computerChoice === "scissors") {
-      showScore("Draw! Both chose Scissors ", playerScore, computerScore);
+      roundMsg = `You Lose! ${computerChoice} beats ${playerChoice}`;
     } else {
-      showScore("Error! Invalid match ", playerScore, computerScore);
+      roundMsg = "Error! Invalid match";
     }
+
+    showScore(roundMsg, humanScore, computerScore);
   }
 
   playRound(getHumanChoice(), getComputerChoice());
