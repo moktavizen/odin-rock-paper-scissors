@@ -1,11 +1,3 @@
-// UI     : -
-// Input  : -
-// Output : random string rock, paper, or scissors
-//
-// Get random number from 1 to 3
-// If 1 returns rock
-// If 2 returns paper
-// If 3 returns scissors
 function getComputerChoice() {
   const choiceId = Math.floor(Math.random() * 3) + 1;
 
@@ -19,12 +11,6 @@ function getComputerChoice() {
   }
 }
 
-// UI     : Browser prompt
-// Input  : string rock, paper, or scissors
-// Output : string rock, paper, or scissors
-//
-// Get text input from user
-// Return the input
 function getHumanChoice() {
   return prompt("Enter your choice! (Rock, Paper, or Scissors)");
 }
@@ -41,14 +27,6 @@ COM\t: ${computerScore}`;
     console.log(text);
   }
 
-  // Input  : human and computer choice
-  // Output : show round winner
-  //
-  // Normalize the inputs
-  // If draw, don't increment, set message
-  // if win, increment human score, set message
-  // if lose, increment computer score, set message
-  // show message
   function playRound(humanChoice, computerChoice) {
     function capitalize(str) {
       return `${str.at(0).toUpperCase()}${str.slice(1).toLowerCase()}`;
