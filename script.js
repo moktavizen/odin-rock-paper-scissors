@@ -54,26 +54,26 @@ COM\t: ${computerScore}`;
       return `${str.at(0).toUpperCase()}${str.slice(1).toLowerCase()}`;
     }
 
-    const stdHumanChoice = capitalize(humanChoice);
-    const stdComputerChoice = capitalize(computerChoice);
+    const human = capitalize(humanChoice);
+    const computer = capitalize(computerChoice);
     let roundMsg;
 
-    if (stdHumanChoice === stdComputerChoice) {
-      roundMsg = `Draw! Both chose ${stdHumanChoice}`;
+    if (human === computer) {
+      roundMsg = `Draw! Both chose ${human}`;
     } else if (
-      (stdHumanChoice === "Rock" && stdComputerChoice === "Scissors") ||
-      (stdHumanChoice === "Paper" && stdComputerChoice === "Rock") ||
-      (stdHumanChoice === "Scissors" && stdComputerChoice === "Paper")
+      (human === "Rock" && computer === "Scissors") ||
+      (human === "Paper" && computer === "Rock") ||
+      (human === "Scissors" && computer === "Paper")
     ) {
       humanScore++;
-      roundMsg = `You win! ${stdHumanChoice} beats ${stdComputerChoice}`;
+      roundMsg = `You win! ${human} beats ${computer}`;
     } else if (
-      (stdComputerChoice === "Rock" && stdHumanChoice === "Scissors") ||
-      (stdComputerChoice === "Paper" && stdHumanChoice === "Rock") ||
-      (stdComputerChoice === "Scissors" && stdHumanChoice === "Paper")
+      (computer === "Rock" && human === "Scissors") ||
+      (computer === "Paper" && human === "Rock") ||
+      (computer === "Scissors" && human === "Paper")
     ) {
       computerScore++;
-      roundMsg = `You Lose! ${stdComputerChoice} beats ${stdHumanChoice}`;
+      roundMsg = `You Lose! ${computer} beats ${human}`;
     } else {
       roundMsg = "Error! Invalid match";
     }
