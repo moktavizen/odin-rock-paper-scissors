@@ -1,81 +1,98 @@
-function getComputerChoice() {
-  const choiceId = Math.floor(Math.random() * 3) + 1;
+const playGame = () => {
+  const getComputerChoice = () => {
+    const choiceId = Math.floor(Math.random() * 3) + 1;
 
-  switch (choiceId) {
-    case 1:
-      return "rock";
-    case 2:
-      return "paper";
-    case 3:
-      return "scissors";
-  }
-}
+    switch (choiceId) {
+      case 1:
+        return "rock";
+      case 2:
+        return "paper";
+      case 3:
+        return "scissors";
+    }
+  };
 
-function getHumanChoice() {
-  return prompt("Enter your choice! (Rock, Paper, or Scissors)");
-}
-
-function playGame() {
-  let humanScore = 0;
+  let playerScore = 0;
   let computerScore = 0;
 
-  function showScore(message, playerScore, computerScore) {
-    const text = `${message}
-Player\t: ${playerScore}
-COM\t: ${computerScore}`;
+  const playerScoreE = document.querySelector("#player-score");
+  const computerScoreE = document.querySelector("#com-score");
 
-    console.log(text);
-  }
+  const playRound = (player, computer) => {
+    const showScore = (message, playerScore, computerScore) => {
+      const text = `${message}\n
+Player: ${playerScore}
+COM: ${computerScore}`;
 
-  function playRound(humanChoice, computerChoice) {
-    function capitalize(str) {
-      return `${str.at(0).toUpperCase()}${str.slice(1).toLowerCase()}`;
-    }
+      alert(text);
+    };
 
-    const human = capitalize(humanChoice);
-    const computer = capitalize(computerChoice);
     let roundMsg;
 
-    if (human === computer) {
-      roundMsg = `Draw! Both chose ${human}`;
+    if (player === computer) {
+      roundMsg = `Draw!\nBoth chose ${player}`;
     } else if (
-      (human === "Rock" && computer === "Scissors") ||
-      (human === "Paper" && computer === "Rock") ||
-      (human === "Scissors" && computer === "Paper")
+      (player === "rock" && computer === "scissors") ||
+      (player === "paper" && computer === "rock") ||
+      (player === "scissors" && computer === "paper")
     ) {
-      humanScore++;
-      roundMsg = `You win! ${human} beats ${computer}`;
+      playerScore++;
+      playerScoreE.textContent = playerScore;
+      roundMsg = `Player win!\nPlayer chose ${player}, COM chose ${computer}`;
     } else if (
-      (computer === "Rock" && human === "Scissors") ||
-      (computer === "Paper" && human === "Rock") ||
-      (computer === "Scissors" && human === "Paper")
+      (computer === "rock" && player === "scissors") ||
+      (computer === "paper" && player === "rock") ||
+      (computer === "scissors" && player === "paper")
     ) {
       computerScore++;
-      roundMsg = `You Lose! ${computer} beats ${human}`;
+      computerScoreE.textContent = computerScore;
+      roundMsg = `Computer win!\nCOM chose ${computer}, Player chose ${player}`;
     } else {
-      roundMsg = "Error! Invalid match";
+      roundMsg = "Error!\nInvalid match";
     }
 
-    showScore(roundMsg, humanScore, computerScore);
-  }
+    showScore(roundMsg, playerScore, computerScore);
 
-  playRound(getHumanChoice(), getComputerChoice());
-  playRound(getHumanChoice(), getComputerChoice());
-  playRound(getHumanChoice(), getComputerChoice());
-  playRound(getHumanChoice(), getComputerChoice());
-  playRound(getHumanChoice(), getComputerChoice());
+    if (playerScore === 5 || computerScore === 5) {
+      let winnerMsg;
 
-  let winnerMsg;
+      if (playerScore > computerScore) {
+        winnerMsg = "The winner is player!";
+      } else if (playerScore < computerScore) {
+        winnerMsg = "The winner is Computer";
+      } else {
+        winnerMsg = "Draw! No winner!";
+      }
 
-  if (humanScore > computerScore) {
-    winnerMsg = "The winner is Human!";
-  } else if (humanScore < computerScore) {
-    winnerMsg = "The winner is Computer";
-  } else {
-    winnerMsg = "Draw! No winner!";
-  }
+      showScore(winnerMsg, playerScore, computerScore);
 
-  showScore(winnerMsg, humanScore, computerScore);
-}
+      playerScore = 0;
+      computerScore = 0;
+      playerScoreE.textContent = playerScore;
+      computerScoreE.textContent = computerScore;
+    }
+  };
+
+  const controlE = document.querySelector(".control");
+  controlE.addEventListener("click", (ev) => {
+    switch (ev.target.id) {
+      case "rock": {
+        const playerSelection = "rock";
+        playRound(playerSelection, getComputerChoice());
+        break;
+      }
+      case "paper": {
+        const playerSelection = "paper";
+        playRound(playerSelection, getComputerChoice());
+        break;
+      }
+      case "scissors": {
+        const playerSelection = "scissors";
+        playRound(playerSelection, getComputerChoice());
+        break;
+      }
+    }
+  });
+};
 
 playGame();
