@@ -6,8 +6,12 @@ This project will apply the following skills:
     - Variables and Operators
     - Data Types and Conditionals
     - Function Basics
+    - Basic DOM Manipulation and Events
 - Problem Solving
     - Understand
     - Plan
     - Divide
     - Debug
+- Git
+    - Branch
+    - Merge
